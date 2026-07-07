@@ -1,0 +1,16 @@
+export const kylasVehicleData = [
+  { id: 399241, name: "Mac Roar - Garbage" },
+  { id: 393511, name: "Mac Dhoom MS/R" },
+  { id: 393515, name: "Mac 900 MS/R" },
+  { id: 393518, name: "Mac MUE Loader" },
+  { id: 394665, name: "Mac Tejas DHL" },
+  { id: 394667, name: "Mack Tejas SH" },
+  { id: 431302, name: "Tejas Ultra" },
+  { id: 431305, name: "Mack Vajra" },
+  { id: 431314, name: "Mack Vayu (D+6)" },
+  { id: 431342, name: "Multi Utility E Cart" },
+  { id: 431345, name: "MUE Loader" },
+  { id: 431353, name: "MUE Roar" },
+  { id: 431358, name: "Vistaar (Open Body)" },
+  { id: 431361, name: "Vistaar (Close Body)" },
+];
