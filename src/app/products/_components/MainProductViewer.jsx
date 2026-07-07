@@ -36,7 +36,7 @@ export default function MainProductViewer({ product }) {
                     <SwiperSlide key={index}>
                       <div className="w-full flex justify-center items-center">
                         <Image
-                          src={`https://api.macautoindia.com/${src}`}
+                          src={`https://api.mack-ev.com/${src}`}
                           alt={src}
                           width={400}
                           height={400}
@@ -190,7 +190,7 @@ export default function MainProductViewer({ product }) {
                 <EnquiryFormModal vehicle_name={product.title} />
                 {product?.brochure?.length > 0 && (
                   <DownloadFormModal
-                    fileUrl={`https://api.macautoindia.com/${product.brochure[0]}`}
+                    fileUrl={`https://api.mack-ev.com/${product.brochure[0]}`}
                     fileName={
                       product?.title
                         ? `${product.title}-brochure.pdf`

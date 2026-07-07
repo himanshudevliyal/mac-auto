@@ -92,7 +92,7 @@ export default function Navbar() {
               href="/sales-service"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "rounded-full border-2 text-[10px] lg:text-sm border-white/30 hover:border-white/50 hover:text-white transition-all bg-white/10 backdrop-blur-sm text-white hover:bg-white/20"
+                "rounded-full border-2 text-[10px] lg:text-sm border-white/30 hover:border-white/50 hover:text-white transition-all bg-white/10 backdrop-blur-sm text-white hover:bg-white/20",
               )}
             >
               MAC Care
@@ -111,7 +111,7 @@ export default function Navbar() {
               href="/dealership"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "rounded-full text-[10px] lg:text-sm border-2 border-white/30 hover:border-white/50 hover:text-white transition-all bg-white/10 backdrop-blur-sm text-white hover:bg-white/20"
+                "rounded-full text-[10px] lg:text-sm border-2 border-white/30 hover:border-white/50 hover:text-white transition-all bg-white/10 backdrop-blur-sm text-white hover:bg-white/20",
               )}
             >
               Dealership
@@ -154,7 +154,7 @@ export default function Navbar() {
                                 className="cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-sm text-sm flex items-center"
                                 onClick={() => {
                                   if (item.brochure?.[0]) {
-                                    const fileUrl = `https://api.macautoindia.com/${item.brochure[0].replace(
+                                    const fileUrl = `https://api.mack-ev.com/${item.brochure[0].replace(
                                       /\\/g,
                                       "/"
                                     )}`;
@@ -185,7 +185,7 @@ export default function Navbar() {
               href="/dealer-locator"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "rounded-full text-[10px] lg:text-sm border-2 border-white/30 hover:border-white/50 hover:text-white transition-all bg-white/10 backdrop-blur-sm text-white hover:bg-white/20"
+                "rounded-full text-[10px] lg:text-sm border-2 border-white/30 hover:border-white/50 hover:text-white transition-all bg-white/10 backdrop-blur-sm text-white hover:bg-white/20",
               )}
             >
               Dealer Locator
@@ -261,7 +261,7 @@ export default function Navbar() {
                           >
                             {category}
                           </button>
-                        )
+                        ),
                       )}
                     </div>
                     <div className="w-2/3 p-6">
@@ -272,7 +272,7 @@ export default function Navbar() {
                             slideVariants[
                               getAnimationDirection(
                                 selectedCategory,
-                                Object.keys(vehicleCategories)
+                                Object.keys(vehicleCategories),
                               )
                             ]
                           }
@@ -296,9 +296,9 @@ export default function Navbar() {
                                     <Image
                                       height={60}
                                       width={60}
-                                      src={`https://api.macautoindia.com/${product.carousel[0].replace(
+                                      src={`https://api.mack-ev.com/${product.carousel[0].replace(
                                         /\\/g,
-                                        "/"
+                                        "/",
                                       )}`}
                                       alt={product.title}
                                       className="max-h-full w-auto object-contain"
@@ -308,7 +308,7 @@ export default function Navbar() {
                                     {product.title}
                                   </p>
                                 </Link>
-                              )
+                              ),
                             )}
                           </div>
                           <div className="mt-6">
@@ -491,9 +491,9 @@ export default function Navbar() {
                                           <Image
                                             height={100}
                                             width={100}
-                                            src={`https://api.macautoindia.com/${product.carousel[0].replace(
+                                            src={`https://api.mack-ev.com/${product.carousel[0].replace(
                                               /\\/g,
-                                              "/"
+                                              "/",
                                             )}`}
                                             alt={product.title}
                                             className="max-h-full w-auto object-contain"
@@ -507,7 +507,7 @@ export default function Navbar() {
                                   </CollapsibleContent>
                                 </Collapsible>
                               );
-                            }
+                            },
                           )}
                         </CollapsibleContent>
                       </Collapsible>

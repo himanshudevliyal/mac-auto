@@ -35,9 +35,9 @@ export default function Products() {
             >
               <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                 <Image
-                  src={`https://api.macautoindia.com/${product.carousel[0].replace(
+                  src={`https://api.mack-ev.com/${product.carousel[0].replace(
                     /\\/g,
-                    "/"
+                    "/",
                   )}`}
                   alt={product.title}
                   fill

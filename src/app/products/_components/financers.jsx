@@ -10,7 +10,7 @@ export default function FinancerLogos({
   const [selectedFinancerId, setSelectedFinancerId] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.macautoindia.com/v1/financers")
+    fetch("https://api.mack-ev.com/v1/financers")
       .then((res) => res.json())
       .then((data) => {
         if (data?.status && data.data?.financers?.length > 0) {
@@ -19,9 +19,9 @@ export default function FinancerLogos({
               (area) =>
                 area.state.toLowerCase() === selectedState.toLowerCase() &&
                 area.city.some(
-                  (c) => c.value.toLowerCase() === selectedCity.toLowerCase()
-                )
-            )
+                  (c) => c.value.toLowerCase() === selectedCity.toLowerCase(),
+                ),
+            ),
           );
 
           setFilteredFinancers(
@@ -30,10 +30,9 @@ export default function FinancerLogos({
               name: financer.name,
               interestRate: Number.parseFloat(financer.interest_percentage), // Store interest rate
               logo: financer.logo.map(
-                (path) =>
-                  `https://api.macautoindia.com/${path.replace(/\\/g, "/")}`
+                (path) => `https://api.mack-ev.com/${path.replace(/\\/g, "/")}`,
               )[0], // only showing the first logo
-            }))
+            })),
           );
           // Reset selected financer and interest rate when state/city changes
           setSelectedFinancerId(null);

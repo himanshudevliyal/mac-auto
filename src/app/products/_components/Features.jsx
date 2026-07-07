@@ -14,8 +14,8 @@ export default function Features({ product }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentImage, setCurrentImage] = useState(
     features[0]?.image
-      ? `https://api.macautoindia.com/${features[0].image}`
-      : "/placeholder.svg"
+      ? `https://api.mack-ev.com/${features[0].image}`
+      : "/placeholder.svg",
   );
 
   const toggleSection = (sectionId) => {
@@ -27,7 +27,7 @@ export default function Features({ product }) {
       setActiveSection(sectionId);
       const section = features?.find((s) => s.id === sectionId);
       const imageUrl = section?.image
-        ? `https://api.macautoindia.com/${section.image.replace(/\\/g, "/")}`
+        ? `https://api.mack-ev.com/${section.image.replace(/\\/g, "/")}`
         : "/placeholder.svg";
       setCurrentImage(imageUrl);
       setTimeout(() => setIsTransitioning(false), 50);

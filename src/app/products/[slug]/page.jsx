@@ -8,7 +8,7 @@ import VideoSection from "../_components/troubleshoot";
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const response = await fetch(
-    `https://api.macautoindia.com/v1/vehicles/get-by-slug/${slug}`
+    `https://api.mack-ev.com/v1/vehicles/get-by-slug/${slug}`,
   );
   const data = await response.json();
   if (!data) return <div>Not Found</div>;
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { slug } = await params;
   const response = await fetch(
-    `https://api.macautoindia.com/v1/vehicles/get-by-slug/${slug}`
+    `https://api.mack-ev.com/v1/vehicles/get-by-slug/${slug}`,
   );
   const data = await response.json();
 

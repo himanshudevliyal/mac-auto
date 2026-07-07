@@ -33,12 +33,12 @@ export default function VehicleCategoryFilter() {
         acc[cat].carousel.push(vehicle.carousel?.[0]);
       }
       return acc;
-    }, {})
+    }, {}),
   );
 
   const filteredProducts = vehicles.filter(
     (product) =>
-      product.category?.toLowerCase() === selectedCategory?.toLowerCase()
+      product.category?.toLowerCase() === selectedCategory?.toLowerCase(),
   );
 
   const formatPrice = (price) =>
@@ -49,7 +49,7 @@ export default function VehicleCategoryFilter() {
     }).format(price);
 
   const selectedCategoryData = categories.find(
-    (cat) => cat.id === selectedCategory
+    (cat) => cat.id === selectedCategory,
   );
 
   return (
@@ -84,7 +84,7 @@ export default function VehicleCategoryFilter() {
                     }`}
                   >
                     <Image
-                      src={`https://api.macautoindia.com/${
+                      src={`https://api.mack-ev.com/${
                         selected?.carousel?.[0] || "images/vehicle-icon.png"
                       }`}
                       alt={selected?.name ?? ""}
@@ -117,9 +117,9 @@ export default function VehicleCategoryFilter() {
             >
               <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                 <Image
-                  src={`https://api.macautoindia.com/${product.carousel[0].replace(
+                  src={`https://api.mack-ev.com/${product.carousel[0].replace(
                     /\\/g,
-                    "/"
+                    "/",
                   )}`}
                   alt={product.title}
                   fill

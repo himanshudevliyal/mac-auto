@@ -43,23 +43,20 @@ export default function DealerForm({
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(
-        "https://api.macautoindia.com/v1/kylas/leads",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: data.firstName,
-            lastName: data.lastName,
-            state: data.state,
+      const response = await fetch("https://api.mack-ev.com/v1/kylas/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          state: data.state,
 
-            city: data.city,
-            phoneNumber: data.phoneNumber,
-            // cfDoYouHaveShowroomSpace: data.cfDoYouHaveShowroomSpace,
-            // cfInvestmentCapacity: data.cfInvestmentCapacity,
-          }),
-        }
-      );
+          city: data.city,
+          phoneNumber: data.phoneNumber,
+          // cfDoYouHaveShowroomSpace: data.cfDoYouHaveShowroomSpace,
+          // cfInvestmentCapacity: data.cfInvestmentCapacity,
+        }),
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -74,7 +71,7 @@ export default function DealerForm({
       toast.error(
         error instanceof Error
           ? error.message
-          : "Submission failed. Please try again."
+          : "Submission failed. Please try again.",
       );
     } finally {
       setIsSubmitting(false);

@@ -25,7 +25,7 @@ export default function Products() {
 
   // Filter vehicles to only show category = "Garbage"
   const garbageVehicles = vehicles.filter(
-    (product) => product.category?.toLowerCase() === "golf"
+    (product) => product.category?.toLowerCase() === "golf",
   );
 
   return (
@@ -51,7 +51,7 @@ export default function Products() {
               >
                 <div className="relative h-50 bg-gray-100 overflow-hidden">
                   <Image
-                    src={`https://api.macautoindia.com/${
+                    src={`https://api.mack-ev.com/${
                       product.carousel?.[0]?.replace(/\\/g, "/") || ""
                     }`}
                     alt={product.title}

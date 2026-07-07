@@ -52,7 +52,7 @@ export default function ContactSection() {
     setIsSubmitting(true);
     try {
       const response = await fetch(
-        "https://api.macautoindia.com/v1/kylas/contact-lead",
+        "https://api.mack-ev.com/v1/kylas/contact-lead",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -66,7 +66,7 @@ export default function ContactSection() {
             // cfDoYouHaveShowroomSpace: data.cfDoYouHaveShowroomSpace,
             // cfInvestmentCapacity: data.cfInvestmentCapacity,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -80,7 +80,7 @@ export default function ContactSection() {
       toast.error(
         error instanceof Error
           ? error.message
-          : "Submission failed. Please try again."
+          : "Submission failed. Please try again.",
       );
     } finally {
       setIsSubmitting(false);

@@ -69,7 +69,7 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
     try {
       // ✅ API call with lastName included
       const response = await fetch(
-        "https://api.macautoindia.com/v1/kylas/download-brochure",
+        "https://api.mack-ev.com/v1/kylas/download-brochure",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -79,7 +79,7 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
             city: formData.city,
             phoneNumber: formData.phone,
           }),
-        }
+        },
       );
 
       if (!response.ok) {

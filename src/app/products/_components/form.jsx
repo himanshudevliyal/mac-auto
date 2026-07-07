@@ -65,14 +65,14 @@ export default function EnquiryFormModal({ vehicle_name }) {
 
     try {
       const response = await fetch(
-        "https://api.macautoindia.com/v1/kylas/enquiry-lead",
+        "https://api.mack-ev.com/v1/kylas/enquiry-lead",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       if (!response.ok) {
