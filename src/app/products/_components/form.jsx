@@ -65,7 +65,7 @@ export default function EnquiryFormModal({ vehicle_name }) {
 
     try {
       const response = await fetch(
-        "https://api.mack-ev.com/v1/kylas/enquiry-lead",
+        "`${process.env.NEXT_PUBLIC_API}/kylas/enquiry-lead",
         {
           method: "POST",
           headers: {

@@ -10,7 +10,7 @@ export default function FinancerLogos({
   const [selectedFinancerId, setSelectedFinancerId] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.mack-ev.com/v1/financers")
+    fetch(`${process.env.NEXT_PUBLIC_API}/financers`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.status && data.data?.financers?.length > 0) {
@@ -30,7 +30,8 @@ export default function FinancerLogos({
               name: financer.name,
               interestRate: Number.parseFloat(financer.interest_percentage), // Store interest rate
               logo: financer.logo.map(
-                (path) => `https://api.mack-ev.com/${path.replace(/\\/g, "/")}`,
+                (path) =>
+                  `${process.env.NEXT_PUBLIC_BASE_URL}/${path.replace(/\\/g, "/")}`,
               )[0], // only showing the first logo
             })),
           );

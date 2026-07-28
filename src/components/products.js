@@ -84,7 +84,7 @@ export default function VehicleCategoryFilter() {
                     }`}
                   >
                     <Image
-                      src={`https://api.mack-ev.com/${
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}/${
                         selected?.carousel?.[0] || "images/vehicle-icon.png"
                       }`}
                       alt={selected?.name ?? ""}
@@ -117,7 +117,7 @@ export default function VehicleCategoryFilter() {
             >
               <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                 <Image
-                  src={`https://api.mack-ev.com/${product.carousel[0].replace(
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product.carousel[0].replace(
                     /\\/g,
                     "/",
                   )}`}

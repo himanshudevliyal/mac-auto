@@ -69,7 +69,7 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
     try {
       // ✅ API call with lastName included
       const response = await fetch(
-        "https://api.mack-ev.com/v1/kylas/download-brochure",
+        "`${process.env.NEXT_PUBLIC_API}/kylas/download-brochure",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

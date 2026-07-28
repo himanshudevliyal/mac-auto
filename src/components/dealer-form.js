@@ -5,26 +5,46 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
-import { Loader2, User, Phone, MapPin, Store, X } from "lucide-react";
+import { Loader2, User, Phone, MapPin, Mail, X } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 const enquiryFormSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().optional(),
-  city: z.string().min(1, "City is required"),
-  state: z.string().min(1, "State is required"),
+  firstName: z
+    .string({
+      required_error: "First name is required",
+    })
+    .trim()
+    .min(2, "First name is required"),
 
-  phoneNumber: z.string().regex(/^[6-9]\d{9}$/, {
-    message:
-      "Phone number must be a valid 10-digit Indian number starting with 6-9",
-  }),
-  // cfDoYouHaveShowroomSpace: z.enum(["Yes", "No"], {
-  //   message: "Please select showroom/space option",
-  // }),
-  // cfInvestmentCapacity: z.string().min(1, "Investment capacity is required"),
+  lastName: z.string().optional(),
+
+  email: z.string().email("Enter valid email").optional().or(z.literal("")),
+
+  city: z
+    .string({
+      required_error: "City is required",
+    })
+    .trim()
+    .min(1, "City is required"),
+
+  state: z
+    .string({
+      required_error: "State is required",
+    })
+    .trim()
+    .min(1, "State is required"),
+
+  phoneNumber: z
+    .string({
+      required_error: "Phone number is required",
+    })
+    .regex(/^[6-9]\d{9}$/, {
+      message:
+        "Phone number must be a valid 10-digit Indian number starting with 6-9",
+    }),
 });
 
 export default function DealerForm({
@@ -33,39 +53,89 @@ export default function DealerForm({
   callback = null,
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(enquiryFormSchema),
-    defaultValues: { vehicle_id: productId },
+
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      city: "",
+      state: "",
+      phoneNumber: "",
+    },
   });
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
+    const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ");
     try {
-      const response = await fetch("https://api.mack-ev.com/v1/kylas/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          state: data.state,
+      const payload = {
+        // Existing Backend Fields
+        fullname: fullName,
 
-          city: data.city,
-          phoneNumber: data.phoneNumber,
-          // cfDoYouHaveShowroomSpace: data.cfDoYouHaveShowroomSpace,
-          // cfInvestmentCapacity: data.cfInvestmentCapacity,
-        }),
-      });
+        mobile_number: data.phoneNumber,
+
+        city: data.city,
+
+        state: data.state,
+
+        email: data.email,
+
+        // Static Dealership Data
+        lead_type: 1,
+
+        pipeline_id: 1,
+
+        stage_id: 9,
+
+        form_id: 1,
+
+        // Product
+        vehicle_id: productId,
+        custom_dealership_pipeline_lead_type: "",
+        custom_dealership_pipeline_lead_quality: "",
+        custom_dealership_pipeline_products_or_services: "",
+        custom_dealership_pipeline_requirement: "",
+        custom_dealership_pipeline_latest_remark: "",
+        custom_dealership_pipeline_past_evauto_industry_experience: "",
+        custom_dealership_pipeline_own_showroom: "",
+        custom_dealership_pipeline_size_of_showroom: "",
+        custom_dealership_pipeline_how_old_is_the_gst_number: "",
+        custom_dealership_pipeline_investment_capacity_or_plan: "",
+        custom_dealership_pipeline_dealer_primary_issue: "",
+      };
+
+      const response = await fetch(
+        `https://leadapi.mack-ev.com/v1/leads/external-lead`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify(payload),
+        },
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
+
         throw new Error(errorData.message || "Failed to submit enquiry.");
       }
 
-      toast.success("Your enquiry has been submitted successfully.");
+      toast.success("Your dealer application has been submitted successfully.");
+
       form.reset();
-      typeof callback === "function" && callback();
+
+      if (typeof callback === "function") {
+        callback();
+      }
+
       router.push("/thank-you");
     } catch (error) {
       toast.error(
@@ -82,13 +152,13 @@ export default function DealerForm({
     form.formState.errors[field] && (
       <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
         <span className="w-1 h-1 bg-red-500 rounded-full"></span>
+
         {form.formState.errors[field]?.message}
       </p>
     );
 
   return (
     <div>
-      {/* Close Button */}
       <Button
         onClick={onClose}
         variant="ghost"
@@ -101,136 +171,96 @@ export default function DealerForm({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* First Name */}
+
           <div className="space-y-2">
-            <label
-              htmlFor="firstName"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <User className="w-4 h-4 text-green-600" />
               First Name *
             </label>
+
             <Input
-              id="firstName"
               placeholder="Enter your first name"
-              className="h-12 border-gray-200 focus:border-green-500 focus:ring-green-500 transition-colors"
               {...form.register("firstName")}
             />
+
             {renderError("firstName")}
           </div>
 
           {/* Last Name */}
+
           <div className="space-y-2">
-            <label
-              htmlFor="lastName"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <User className="w-4 h-4 text-green-600" />
               Last Name
             </label>
+
             <Input
-              id="lastName"
               placeholder="Enter your last name"
-              className="h-12 border-gray-200 focus:border-green-500 focus:ring-green-500 transition-colors"
               {...form.register("lastName")}
             />
           </div>
 
-          {/* Phone Number */}
+          {/* Email */}
+
           <div className="space-y-2">
-            <label
-              htmlFor="phoneNumber"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <Mail className="w-4 h-4 text-green-600" />
+              Email
+            </label>
+
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              {...form.register("email")}
+            />
+
+            {renderError("email")}
+          </div>
+
+          {/* Phone */}
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <Phone className="w-4 h-4 text-green-600" />
               Phone Number *
             </label>
+
             <Input
-              id="phoneNumber"
               type="tel"
-              placeholder="+91 99 9999 9999"
-              className="h-12 border-gray-200 focus:border-green-500 focus:ring-green-500 transition-colors"
+              placeholder="9999999999"
               {...form.register("phoneNumber")}
             />
+
             {renderError("phoneNumber")}
           </div>
 
           {/* City */}
+
           <div className="space-y-2">
-            <label
-              htmlFor="city"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-green-600" />
               City *
             </label>
-            <Input
-              id="city"
-              placeholder="Enter your city"
-              className="h-12 border-gray-200 focus:border-green-500 focus:ring-green-500 transition-colors"
-              {...form.register("city")}
-            />
+
+            <Input placeholder="Enter your city" {...form.register("city")} />
+
             {renderError("city")}
           </div>
+
+          {/* State */}
+
           <div className="space-y-2">
-            <label
-              htmlFor="state"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-green-600" />
               State *
             </label>
-            <Input
-              id="state"
-              placeholder="Enter your state"
-              className="h-12 border-gray-200 focus:border-green-500 focus:ring-green-500 transition-colors"
-              {...form.register("state")}
-            />
+
+            <Input placeholder="Enter your state" {...form.register("state")} />
+
             {renderError("state")}
           </div>
-
-          {/* Showroom Space */}
-          {/* <div className="space-y-2">
-            <label
-              htmlFor="cfDoYouHaveShowroomSpace"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
-              <Store className="w-4 h-4 text-green-600" />
-              Do you have showroom/space? *
-            </label>
-            <select
-              {...form.register("cfDoYouHaveShowroomSpace")}
-              className="w-full h-12 border border-gray-200 rounded-md px-4 py-3 focus:border-green-500 focus:ring-green-500 focus:outline-none transition-colors bg-white"
-            >
-              <option value="">Select an option</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-            {renderError("cfDoYouHaveShowroomSpace")}
-          </div> */}
-
-          {/* Investment Capacity */}
-          {/* <div className="space-y-2">
-            <label
-              htmlFor="cfInvestmentCapacity"
-              className="text-sm font-medium text-gray-700 flex items-center gap-2"
-            >
-              <span className="w-4 h-4 text-green-600">₹</span>
-              Investment Capacity *
-            </label>
-            <select
-              {...form.register("cfInvestmentCapacity")}
-              className="w-full h-12 border border-gray-200 rounded-md px-4 py-3 focus:border-green-500 focus:ring-green-500 focus:outline-none transition-colors bg-white"
-            >
-              <option value="">Select investment range</option>
-              <option value="₹5-10 lakh">₹5-10 lakh</option>
-              <option value="₹10-15 lakh">₹10-15 lakh</option>
-              <option value="Above ₹15 lakh">Above ₹15 lakh</option>
-            </select>
-            {renderError("cfInvestmentCapacity")}
-          </div> */}
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting}

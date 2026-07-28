@@ -82,7 +82,7 @@ export default function VehicleCategoryFilter() {
 
                 const imageSrc =
                   category.image ||
-                  `https://api.mack-ev.com/${selected?.carousel?.[0]}`;
+                  `${process.env.NEXT_PUBLIC_BASE_URL}/${selected?.carousel?.[0]}`;
 
                 return (
                   <button
@@ -130,7 +130,7 @@ export default function VehicleCategoryFilter() {
             >
               <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                 <Image
-                  src={`https://api.mack-ev.com/${product.carousel[0].replace(/\\/g, "/")}`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product.carousel[0].replace(/\\/g, "/")}`}
                   alt={product.title}
                   fill
                   sizes="(max-width: 768px) 100vw,

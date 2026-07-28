@@ -14,7 +14,7 @@ export default function Features({ product }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentImage, setCurrentImage] = useState(
     features[0]?.image
-      ? `https://api.mack-ev.com/${features[0].image}`
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}/${features[0].image}`
       : "/placeholder.svg",
   );
 
@@ -27,7 +27,7 @@ export default function Features({ product }) {
       setActiveSection(sectionId);
       const section = features?.find((s) => s.id === sectionId);
       const imageUrl = section?.image
-        ? `https://api.mack-ev.com/${section.image.replace(/\\/g, "/")}`
+        ? `${process.env.NEXT_PUBLIC_BASE_URL}/${section.image.replace(/\\/g, "/")}`
         : "/placeholder.svg";
       setCurrentImage(imageUrl);
       setTimeout(() => setIsTransitioning(false), 50);

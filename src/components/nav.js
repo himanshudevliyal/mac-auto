@@ -154,7 +154,7 @@ export default function Navbar() {
                                 className="cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-sm text-sm flex items-center"
                                 onClick={() => {
                                   if (item.brochure?.[0]) {
-                                    const fileUrl = `https://api.mack-ev.com/${item.brochure[0].replace(
+                                    const fileUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${item.brochure[0].replace(
                                       /\\/g,
                                       "/"
                                     )}`;
@@ -296,7 +296,7 @@ export default function Navbar() {
                                     <Image
                                       height={60}
                                       width={60}
-                                      src={`https://api.mack-ev.com/${product.carousel[0].replace(
+                                      src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product.carousel[0].replace(
                                         /\\/g,
                                         "/",
                                       )}`}
@@ -491,7 +491,7 @@ export default function Navbar() {
                                           <Image
                                             height={100}
                                             width={100}
-                                            src={`https://api.mack-ev.com/${product.carousel[0].replace(
+                                            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product.carousel[0].replace(
                                               /\\/g,
                                               "/",
                                             )}`}

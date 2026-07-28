@@ -51,7 +51,7 @@ export default function Products() {
               >
                 <div className="relative h-50 bg-gray-100 overflow-hidden">
                   <Image
-                    src={`https://api.mack-ev.com/${
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/${
                       product.carousel?.[0]?.replace(/\\/g, "/") || ""
                     }`}
                     alt={product.title}
