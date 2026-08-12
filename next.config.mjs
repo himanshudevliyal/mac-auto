@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["img.youtube.com", "api.macautoindia.com", "api.mack-ev.com"],
+    remotePatterns: [
+      { protocol: "https", hostname: "img.youtube.com", port: "" },
+      { protocol: "https", hostname: "api.macautoindia.com", port: "" },
+      { protocol: "https", hostname: "api.mack-ev.com", port: "" },
+    ],
   },
   async redirects() {
     return [
@@ -20,6 +24,7 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+
       // {
       //   source: "/e-tricycle-meerut",
       //   destination: "/",
