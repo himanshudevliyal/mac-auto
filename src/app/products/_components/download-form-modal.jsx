@@ -87,6 +87,7 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
          
     city: formData.city,
     source:"Website",
+    sub_source:"Download brochure",
   "fullname":`${formData.name ?? ""} ${formData.lastName ?? ""}`,
   "email": "",
   "mobile_number":  formData.phone,
