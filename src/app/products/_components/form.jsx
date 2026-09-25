@@ -81,7 +81,7 @@ export default function EnquiryFormModal({ vehicle_name }) {
 
     try {
       const response = await fetch(
-        "https://t7gx1q7p-3001.inc1.devtunnels.ms/v1/leads/external-lead",
+        "https://leadapi.mack-ev.com/v1/leads/external-lead",
         {
           method: "POST",
           headers: {
