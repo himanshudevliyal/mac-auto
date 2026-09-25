@@ -5,31 +5,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
-import {
-  Loader2,
-  User,
-  Phone,
-  MapPin,
-  Mail,
-  X,
-  Tag,
-  Star,
-  Package,
-  ClipboardList,
-  MessageSquare,
-  History,
-  Store,
-  Ruler,
-  FileText,
-  IndianRupee,
-  AlertCircle,
-} from "lucide-react";
+import { Loader2, User, Phone, MapPin, Mail, X } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
-const optionalText = z.string().trim().optional().or(z.literal(""));
 
 const enquiryFormSchema = z.object({
   firstName: z
@@ -65,107 +45,7 @@ const enquiryFormSchema = z.object({
       message:
         "Phone number must be a valid 10-digit Indian number starting with 6-9",
     }),
-
-  // Custom dealership pipeline fields (all optional)
-  leadType: optionalText,
-  leadQuality: optionalText,
-  productsOrServices: optionalText,
-  requirement: optionalText,
-  latestRemark: optionalText,
-  pastEvAutoIndustryExperience: optionalText,
-  ownShowroom: optionalText,
-  sizeOfShowroom: optionalText,
-  gstNumberAge: z
-    .string()
-    .trim()
-    .regex(/^\d*$/, { message: "Enter age in years (numbers only)" })
-    .optional()
-    .or(z.literal("")),
-  investmentCapacityOrPlan: optionalText,
-  dealerPrimaryIssue: optionalText,
 });
-
-// Config for the custom fields so they are rendered from one place.
-// type: "input" (default) | "select" | "textarea"
-const customFields = [
-  {
-    name: "leadType",
-    label: "Lead Type",
-    icon: Tag,
-    placeholder: "Enter lead type",
-  },
-  {
-    name: "leadQuality",
-    label: "Lead Quality",
-    icon: Star,
-    placeholder: "Enter lead quality",
-  },
-  {
-    name: "productsOrServices",
-    label: "Products or Services",
-    icon: Package,
-    placeholder: "Products or services you deal in",
-  },
-  {
-    name: "pastEvAutoIndustryExperience",
-    label: "Past EV / Auto Industry Experience",
-    icon: History,
-    placeholder: "e.g. 5 years in two-wheeler dealership",
-  },
-  {
-    name: "ownShowroom",
-    label: "Do You Own a Showroom?",
-    icon: Store,
-    type: "select",
-    options: ["Yes", "No"],
-  },
-  {
-    name: "sizeOfShowroom",
-    label: "Size of Showroom",
-    icon: Ruler,
-    placeholder: "e.g. 1500 sq ft",
-  },
-  {
-    name: "gstNumberAge",
-    label: "How Old Is the GST Number? (years)",
-    icon: FileText,
-    placeholder: "e.g. 3",
-    inputType: "number",
-  },
-  {
-    name: "investmentCapacityOrPlan",
-    label: "Investment Capacity / Plan",
-    icon: IndianRupee,
-    placeholder: "e.g. ₹10-15 lakh",
-  },
-  {
-    name: "requirement",
-    label: "Requirement",
-    icon: ClipboardList,
-    type: "textarea",
-    fullWidth: true,
-    placeholder: "Describe your requirement",
-  },
-  {
-    name: "dealerPrimaryIssue",
-    label: "Dealer Primary Issue",
-    icon: AlertCircle,
-    type: "textarea",
-    fullWidth: true,
-    placeholder: "Main issue you face as a dealer",
-  },
-  {
-    name: "latestRemark",
-    label: "Latest Remark",
-    icon: MessageSquare,
-    type: "textarea",
-    fullWidth: true,
-    placeholder: "Any additional remarks",
-  },
-];
-
-const controlClasses =
-  "w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm outline-none focus-visible:ring-1 focus-visible:ring-ring";
 
 export default function DealerForm({
   productId = "",
@@ -186,17 +66,6 @@ export default function DealerForm({
       city: "",
       state: "",
       phoneNumber: "",
-      leadType: "",
-      leadQuality: "",
-      productsOrServices: "",
-      requirement: "",
-      latestRemark: "",
-      pastEvAutoIndustryExperience: "",
-      ownShowroom: "",
-      sizeOfShowroom: "",
-      gstNumberAge: "",
-      investmentCapacityOrPlan: "",
-      dealerPrimaryIssue: "",
     },
   });
 
@@ -227,26 +96,18 @@ export default function DealerForm({
 
         // Product
         vehicle_id: productId,
-
-        // Custom fields
-        custom_dealership_pipeline_lead_type: data.leadType || "",
-        custom_dealership_pipeline_lead_quality: data.leadQuality || "",
-        custom_dealership_pipeline_products_or_services:
-          data.productsOrServices || "",
-        custom_dealership_pipeline_requirement: data.requirement || "",
-        custom_dealership_pipeline_latest_remark: data.latestRemark || "",
-        custom_dealership_pipeline_past_evauto_industry_experience:
-          data.pastEvAutoIndustryExperience || "",
-        custom_dealership_pipeline_own_showroom: data.ownShowroom || "",
-        custom_dealership_pipeline_size_of_showroom: data.sizeOfShowroom || "",
-        custom_dealership_pipeline_how_old_is_the_gst_number:
-          data.gstNumberAge || "",
-        custom_dealership_pipeline_investment_capacity_or_plan:
-          data.investmentCapacityOrPlan || "",
-        custom_dealership_pipeline_dealer_primary_issue:
-          data.dealerPrimaryIssue || "",
-
-        source: "Website",
+        custom_dealership_pipeline_lead_type: "",
+        custom_dealership_pipeline_lead_quality: "",
+        custom_dealership_pipeline_products_or_services: "",
+        custom_dealership_pipeline_requirement: "",
+        custom_dealership_pipeline_latest_remark: "",
+        custom_dealership_pipeline_past_evauto_industry_experience: "",
+        custom_dealership_pipeline_own_showroom: "",
+        custom_dealership_pipeline_size_of_showroom: "",
+        custom_dealership_pipeline_how_old_is_the_gst_number: "",
+        custom_dealership_pipeline_investment_capacity_or_plan: "",
+        custom_dealership_pipeline_dealer_primary_issue: "",
+        source:"Website"
       };
 
       const response = await fetch(
@@ -296,49 +157,6 @@ export default function DealerForm({
         {form.formState.errors[field]?.message}
       </p>
     );
-
-  const renderCustomField = (field) => {
-    const Icon = field.icon;
-
-    return (
-      <div
-        key={field.name}
-        className={`space-y-2 ${field.fullWidth ? "md:col-span-2" : ""}`}
-      >
-        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-          <Icon className="w-4 h-4 text-green-600" />
-          {field.label}
-        </label>
-
-        {field.type === "select" ? (
-          <select className={controlClasses} {...form.register(field.name)}>
-            <option value="">Select</option>
-            {field.options.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        ) : field.type === "textarea" ? (
-          <textarea
-            rows={3}
-            placeholder={field.placeholder}
-            className={controlClasses}
-            {...form.register(field.name)}
-          />
-        ) : (
-          <Input
-            type={field.inputType || "text"}
-            min={field.inputType === "number" ? 0 : undefined}
-            placeholder={field.placeholder}
-            {...form.register(field.name)}
-          />
-        )}
-
-        {renderError(field.name)}
-      </div>
-    );
-  };
 
   return (
     <div>
@@ -442,9 +260,6 @@ export default function DealerForm({
 
             {renderError("state")}
           </div>
-
-          {/* Custom dealership pipeline fields */}
-          {customFields.map(renderCustomField)}
         </div>
 
         <button
