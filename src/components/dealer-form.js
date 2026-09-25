@@ -107,6 +107,7 @@ export default function DealerForm({
         custom_dealership_pipeline_how_old_is_the_gst_number: "",
         custom_dealership_pipeline_investment_capacity_or_plan: "",
         custom_dealership_pipeline_dealer_primary_issue: "",
+        source:"Website"
       };
 
       const response = await fetch(

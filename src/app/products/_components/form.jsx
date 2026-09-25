@@ -55,17 +55,33 @@ export default function EnquiryFormModal({ vehicle_name }) {
     setIsSubmitting(true);
 
     const payload = {
-      phoneNumber: data.phoneNumber,
-      vehicle_name: data.vehicle_name,
-      firstName: data.firstName,
-      lastName: data.lastName,
       city: data.city,
-      quantity: data.quantity,
+      source:"Website",
+  "fullname":`${data.firstName ?? ""} ${data.lastName ?? ""}`,
+  "email": "",
+  "mobile_number": data.phoneNumber,
+  "pipeline_id": 2,
+  "stage_id": 20,
+  "form_id": 2,
+  "custom_govt_loader_pipeline_lead_type": "",
+  "custom_govt_loader_pipeline_lead_quality": "",
+  "custom_govt_loader_pipeline_products_or_services": "",
+  "custom_govt_loader_pipeline_requirement": "",
+  "custom_govt_loader_pipeline_latest_remark": "i",
+  "custom_govt_loader_pipeline_product": data.vehicle_name,
+  "custom_govt_loader_pipeline_quantity": data.quantity,
+  "custom_govt_loader_pipeline_past_evauto_industry_experience": "",
+  "custom_govt_loader_pipeline_own_showroom": "",
+  "custom_govt_loader_pipeline_size_of_showroom": "",
+  "custom_govt_loader_pipeline_how_old_is_the_gst_number": "",
+  "custom_govt_loader_pipeline_investment_capacity_or_plan": "",
+  "custom_govt_loader_pipeline_dealer_primary_issue": ""
+
     };
 
     try {
       const response = await fetch(
-        "`${process.env.NEXT_PUBLIC_API}/kylas/enquiry-lead",
+        "https://t7gx1q7p-3001.inc1.devtunnels.ms/v1/leads/external-lead",
         {
           method: "POST",
           headers: {

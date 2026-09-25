@@ -17,9 +17,18 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    lastName: "", // ✅ Added lastName
+    lastName: "", 
     phone: "",
     city: "",
+
+
+
+
+
+
+
+
+    
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,15 +78,38 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
     try {
       // ✅ API call with lastName included
       const response = await fetch(
-        "`${process.env.NEXT_PUBLIC_API}/kylas/download-brochure",
+        "https://leadapi.mack-ev.com/v1/leads/external-lead",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            firstName: formData.name,
-            lastName: formData.lastName,
-            city: formData.city,
-            phoneNumber: formData.phone,
+            
+         
+    city: formData.city,
+    source:"Website",
+  "fullname":`${formData.name ?? ""} ${formData.lastName ?? ""}`,
+  "email": "",
+  "mobile_number":  formData.phone,
+  "pipeline_id": 2,
+  "stage_id": 20,
+  "form_id": 2,
+  "custom_govt_loader_pipeline_lead_type": "",
+  "custom_govt_loader_pipeline_lead_quality": "",
+  "custom_govt_loader_pipeline_products_or_services": "",
+  "custom_govt_loader_pipeline_requirement": "",
+  "custom_govt_loader_pipeline_latest_remark": "i",
+  "custom_govt_loader_pipeline_product":"",
+  "custom_govt_loader_pipeline_quantity":"",
+  "custom_govt_loader_pipeline_past_evauto_industry_experience": "",
+  "custom_govt_loader_pipeline_own_showroom": "",
+  "custom_govt_loader_pipeline_size_of_showroom": "",
+  "custom_govt_loader_pipeline_how_old_is_the_gst_number": "",
+  "custom_govt_loader_pipeline_investment_capacity_or_plan": "",
+  "custom_govt_loader_pipeline_dealer_primary_issue": ""
+
+
+
+
           }),
         },
       );
