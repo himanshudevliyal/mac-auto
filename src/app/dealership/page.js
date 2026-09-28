@@ -2,36 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import {
-  CheckCircle2,
-  Phone,
-  Mail,
-  Globe,
-  Users,
-  Lightbulb,
-  Handshake,
-  Rocket,
-  Award,
-  DollarSign,
-  Zap,
-  Wrench,
-  Star,
-  CreditCard,
-  Megaphone,
-  FileCheck,
-  FileText,
-  CheckCircle,
-  Truck,
-  Store,
-  Car,
-  Battery,
-  Smartphone,
-  MailIcon,
-  GraduationCap,
-  MessageSquare,
-  Database,
-  LineChart,
-  Headphones,
-  RefreshCw,
+
   ArrowLeft,
 } from "lucide-react";
 

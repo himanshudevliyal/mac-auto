@@ -248,7 +248,7 @@ export default function Navbar() {
                 >
                   <div className="flex bg-white rounded-lg shadow-xl text-black">
                     <div className="w-1/3 border-r border-gray-200">
-                      {["passenger", "loader", "garbage", "golf"].map(
+                      {["passenger", "loader", "garbage", "golf", "e-scooter"].map(
                         (category) => (
                           <button
                             key={category}
@@ -313,7 +313,7 @@ export default function Navbar() {
                           </div>
                           <div className="mt-6">
                             <Link
-                              href={`/${selectedCategory.toLowerCase()}`}
+                              href="/products"
                               className="text-sm font-medium hover:text-gray-700"
                             >
                               View all {selectedCategory} →
@@ -457,7 +457,7 @@ export default function Navbar() {
                           <ChevronDown className="h-4 w-4 transition-transform" />
                         </CollapsibleTrigger>
                         <CollapsibleContent className="pl-4 pt-2 space-y-2">
-                          {["passenger", "loader", "garbage", "golf"].map(
+                          {["passenger", "loader", "garbage", "golf","e-scooter"].map(
                             (categoryKey) => {
                               const categoryData =
                                 vehicleCategories[categoryKey];
