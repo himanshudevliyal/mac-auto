@@ -87,13 +87,10 @@ export default function DealerForm({
 
         // Static Dealership Data
         lead_type: 1,
-
-        pipeline_id: 1,
-
-        stage_id: 9,
-
-        form_id: 1,
-
+  "pipeline_id": 25,
+  "stage_id": 201,
+        "form_id": 27,
+"organization_id": "c71a5547-4015-419a-b9ee-65c841878b45",
         // Product
         vehicle_id: productId,
         custom_dealership_pipeline_lead_type: "",
@@ -111,7 +108,7 @@ export default function DealerForm({
       };
 
       const response = await fetch(
-        `https://leadapi.mack-ev.com/v1/leads/external-lead`,
+        `${process.env.NEXT_PUBLIC_LEAD_API}/v1/leads/external-lead`,
         {
           method: "POST",
 

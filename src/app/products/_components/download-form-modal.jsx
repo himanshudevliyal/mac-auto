@@ -76,9 +76,9 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
     setIsSubmitting(true);
 
     try {
-      // ✅ API call with lastName included
+  
       const response = await fetch(
-        "https://leadapi.mack-ev.com/v1/leads/external-lead",
+        `${process.env.NEXT_PUBLIC_LEAD_API}/v1/leads/external-lead`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -91,9 +91,11 @@ export default function DownloadFormModal({ fileUrl, fileName }) {
   "fullname":`${formData.name ?? ""} ${formData.lastName ?? ""}`,
   "email": "",
   "mobile_number":  formData.phone,
-  "pipeline_id": 2,
-  "stage_id": 20,
-  "form_id": 2,
+        lead_type: 1,
+  "pipeline_id": 25,
+  "stage_id": 201,
+        "form_id": 27,
+"organization_id": "c71a5547-4015-419a-b9ee-65c841878b45",
   "custom_govt_loader_pipeline_lead_type": "",
   "custom_govt_loader_pipeline_lead_quality": "",
   "custom_govt_loader_pipeline_products_or_services": "",

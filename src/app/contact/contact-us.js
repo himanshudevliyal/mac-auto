@@ -94,7 +94,7 @@ export default function ContactSection() {
         .join(" ");
 
       const response = await fetch(
-        `https://leadapi.mack-ev.com/v1/leads/external-lead`,
+        `${process.env.NEXT_PUBLIC_LEAD_API}/v1/leads/external-lead`,
         {
           method: "POST",
           headers: {
