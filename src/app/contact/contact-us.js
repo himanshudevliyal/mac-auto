@@ -47,7 +47,7 @@ const enquiryFormSchema = z.object({
 
 const LEAD_TYPES = [
   {
-    id: 2,
+    id: 26,
     name: "Govt & Loader Pipeline",
     is_active: true,
     entity_type: "lead",
@@ -55,7 +55,7 @@ const LEAD_TYPES = [
     stage_count: 10,
   },
   {
-    id: 1,
+    id: 25,
     name: "Dealership Pipeline",
     is_active: true,
     entity_type: "lead",
@@ -65,14 +65,16 @@ const LEAD_TYPES = [
 ];
 
 const STAGE_MAPPING = {
-  1: 9,
-  2: 20,
+  26: 212,
+  25: 201,
 };
 
 const FORM_MAPPING = {
-  1: 1,
-  2: 2,
+  26: 28,
+  25: 27,
 };
+
+
 
 export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -109,6 +111,7 @@ export default function ContactSection() {
             form_id: formId,
             owner_id: "d93ece3b-793d-4d2e-9340-2b7fd45b9c48",
             city: data.city,
+            "organization_id": "c71a5547-4015-419a-b9ee-65c841878b45",
             source: "Website",
             custom_dealership_pipeline_lead_type: "",
             custom_dealership_pipeline_lead_quality: "",
