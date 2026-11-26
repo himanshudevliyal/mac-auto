@@ -98,7 +98,9 @@ export default function MacBuddy() {
           <div className="p-6 border-t border-gray-200/50 bg-white/80">
             <div className="space-y-3">
               <a
-                href="https://api.whatsapp.com/send/?phone=919990018193&text=I+want+to+enquire+about+MAC+Auto&type=phone_number&app_absent=0"
+                href={`https://api.whatsapp.com/send/?phone=919990018193&text=${encodeURIComponent(
+                  "Hello MACK EV Team! \n\nI am interested in your electric vehicles. Please share details about your available models, pricing, specifications and dealership opportunities."
+                )}&type=phone_number&app_absent=0`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 w-full px-6 py-4 font-semibold text-white rounded-[20px] shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl active:scale-95  bgThree"
